@@ -514,6 +514,7 @@ original_values = [result_original["cohesion_score"], result_original["coupling_
 x = range(len(labels))
 width = 0.35
 
+
 fig, ax = plt.subplots(figsize=(8, 5))
 ax.bar([i - width/2 for i in x], modular_values, width=width, label="Improved Structure", color="mediumseagreen")
 ax.bar([i + width/2 for i in x], original_values, width=width, label="Original Structure", color="salmon")
