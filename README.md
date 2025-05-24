@@ -1,7 +1,7 @@
 # 🌟 소프트웨어공학 - 개인 실습 과제
 
 - '일상 속 상품 검색 기능'을 구현한 프로젝트
-- 작업순서
+- 작업순서 [🔗 프로젝트 링크](https://github.com/users/yewonseowill/projects/1) 
 <img width="1077" alt="스크린샷 2025-05-24 오후 9 23 31" src="https://github.com/user-attachments/assets/484a01b8-a217-4174-b38b-a704ac9156e1" />
 
 
