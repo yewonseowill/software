@@ -63,8 +63,103 @@ sequenceDiagram
 
 ## 3. 구현을 위한 파이썬 코드
 ```
+# shopping_flow.py
+
+from typing import List, Optional
+
+# 상품 클래스
+class Product:
+    def __init__(self, product_id: int, name: str, brand: str, price: int):
+        self.product_id = product_id
+        self.name = name
+        self.brand = brand
+        self.price = price
+
+    def __repr__(self):
+        return f"{self.name} ({self.brand}) - {self.price}원"
+
+# 상품 저장소 (데이터)
+class ProductRepository:
+    def __init__(self):
+        self.products = [
+            Product(1, "로지텍 무선 마우스", "로지텍", 25000),
+            Product(2, "HP 유선 마우스", "HP", 15000),
+            Product(3, "로지텍 게이밍 마우스", "로지텍", 45000),
+            Product(4, "삼성 블루투스 마우스", "삼성", 29000),
+            Product(5, "LG 유선 마우스", "LG", 18000),
+            Product(6, "로지텍 무선 키보드", "로지텍", 32000),
+            Product(7, "애플 매직 마우스", "애플", 79000),
+            Product(8, "델 유선 마우스", "델", 14000),
+            Product(9, "MS 블루투스 마우스", "MS", 31000),
+            Product(10, "로지텍 사일런트 마우스", "로지텍", 27000),
+        ]
+
+    def get_latest_products(self, count: int = 10) -> List[Product]:
+        return self.products[:count]
+
+    def search(self, keyword: str) -> List[Product]:
+        return [p for p in self.products if keyword in p.name]
+
+    def filter(self, products: List[Product], brand: Optional[str], max_price: Optional[int]) -> List[Product]:
+        filtered = products
+        if brand:
+            filtered = [p for p in filtered if p.brand == brand]
+        if max_price:
+            filtered = [p for p in filtered if p.price <= max_price]
+        return filtered
+
+    def get_detail(self, product_id: int) -> Optional[Product]:
+        for p in self.products:
+            if p.product_id == product_id:
+                return p
+        return None
+
+# 웹 앱 로직
+class WebApp:
+    def __init__(self, repository: ProductRepository):
+        self.repo = repository
+
+    def load_home(self):
+        return self.repo.get_latest_products()
+
+    def search_products(self, keyword: str, brand: Optional[str], max_price: Optional[int]):
+        result = self.repo.search(keyword)
+        return sorted(self.repo.filter(result, brand, max_price), key=lambda x: x.price)
+
+    def show_detail(self, product_id: int):
+        return self.repo.get_detail(product_id)
+
+# 사용자 시뮬레이션
+class User:
+    def __init__(self, app: WebApp):
+        self.app = app
+
+    def run(self):
+        print("📲 쇼핑몰 접속")
+        latest = self.app.load_home()
+        print("🛒 최신 상품 리스트:")
+        for p in latest:
+            print("-", p)
+
+        print("\n🔍 '마우스' 검색 + 로지텍 브랜드 + 가격 ≤ 30000원")
+        filtered = self.app.search_products("마우스", "로지텍", 30000)
+        for p in filtered:
+            print("🎯 검색결과:", p)
+
+        if filtered:
+            detail = self.app.show_detail(filtered[0].product_id)
+            print("\n📄 상세 페이지:")
+            print("📝", detail)
+
+# 실행
+if __name__ == "__main__":
+    repo = ProductRepository()
+    app = WebApp(repo)
+    user = User(app)
+    user.run()
 
 ```
+<img width="459" alt="스크린샷 2025-05-24 오후 1 31 38" src="https://github.com/user-attachments/assets/436cf4b9-8ca3-438d-99e0-a7617592a5dd" />
 
 
 ### 사용 클래스:
