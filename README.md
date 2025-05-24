@@ -324,7 +324,16 @@ shopping_flow/
 ---
 
 ## 📈 시각화
+☑️ **기존/개선된 코드의 응집도/결합도 비교**
+<br>
+<img width="924" alt="스크린샷 2025-05-24 오후 8 37 36" src="https://github.com/user-attachments/assets/9b10e4cb-679f-4bc8-8e91-a57a2b9d4200" />
 
+🔍 해석
+	•	Cohesion Score:
+	•	두 구조 모두 약 3.89로 동일 → 클래스 내부 메서드 간 연관성이 비슷함
+	•	Coupling Score:
+	•	✅ 개선 구조는 12점으로 매우 느슨한 결합
+	•	⚠️ 기존 구조는 6점 → 명시적 의존이 많아 유지보수에 불리
 
 
 ---
@@ -333,10 +342,6 @@ shopping_flow/
 
 * **응집도는 구조 변경 전후 큰 차이는 없었지만**,
 * **결합도는 인터페이스와 계층 분리를 통해 크게 향상됨**
-
-
-
-
 📌 **총평:** 클래스 간 의존성이 낮고, 추상화 인터페이스 도입으로 테스트 용이성과 재사용성, 유지보수성이 우수함
 
 ---
@@ -482,20 +487,6 @@ plt.show()
 
 
 ```
-☑️ **기존/개선된 코드의 응집도/결합도 비교**
-<br>
-<img width="924" alt="스크린샷 2025-05-24 오후 8 37 36" src="https://github.com/user-attachments/assets/9b10e4cb-679f-4bc8-8e91-a57a2b9d4200" />
-
-
-☑️ **그래프**
-![Comparison of Cohesion and Coupling between Structures](https://github.com/user-attachments/assets/f92c7ee2-39c5-4db4-8e07-936102e24764)
-
-🔍 해석
-	•	Cohesion Score:
-	•	두 구조 모두 약 3.89로 동일 → 클래스 내부 메서드 간 연관성이 비슷함
-	•	Coupling Score:
-	•	✅ 개선 구조는 12점으로 매우 느슨한 결합
-	•	⚠️ 기존 구조는 6점 → 명시적 의존이 많아 유지보수에 불리
 
 ## 6. 결론
 ## 🔍 개선 포인트 요약
