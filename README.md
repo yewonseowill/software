@@ -552,7 +552,7 @@ $ python main.py
 
 ## 📊 분석 결과 요약
 
-| 구조    | Cohesion Score | Coupling 가능성 지수 |
+| 구조    | Cohesion Score | Coupling 건강 지수 |
 | ----- | -------------- | -------------- |
 | 기존 구조 | 3.89           | 6.0            |
 | 개선 구조 | 3.89           | 12.0           |
