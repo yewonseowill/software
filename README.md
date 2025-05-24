@@ -9,7 +9,7 @@
 
 * 사용자가 상품을 검색하고 조건만출 (브랜드 / 가격) 후 검색결과 보기
 * 반환된 검색 결과에서 하나를 선택하여 상세정보 확인
-* <img width="690" alt="스크린샷 2025-05-24 오후 1 35 39" src="https://github.com/user-attachments/assets/e20d83c5-2a48-4be9-951a-35b2b74ecbea" />
+<img width="690" alt="스크린샷 2025-05-24 오후 1 35 39" src="https://github.com/user-attachments/assets/e20d83c5-2a48-4be9-951a-35b2b74ecbea" />
 
 ---
 
