@@ -193,6 +193,8 @@ if __name__ == "__main__":
 
 🔗 [Google Colab Code Link](https://colab.research.google.com/drive/1-5BSQHrmf6QDwBGMkTixB7D0aH5T5tDb?usp=sharing)
 
+<img width="1030" alt="스크린샷 2025-05-24 오후 2 11 01" src="https://github.com/user-attachments/assets/743d5b70-0068-4971-b131-b35e6087927d" />
+
 :white_check_mark:
  **실행결과**
 
