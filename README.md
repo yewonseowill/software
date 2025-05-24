@@ -573,10 +573,14 @@ import ace_tools as tools; tools.display_dataframe_to_user("구조별 응집도/
 
 ```
 ☑️ **기존/개선된 코드의 응집도/결합도 비교**
+<br>
 <img width="679" alt="스크린샷 2025-05-24 오후 3 10 03" src="https://github.com/user-attachments/assets/6657ffff-3f91-45d0-984a-c8ae4533cacb" />
 <br>
 
 <img width="686" alt="스크린샷 2025-05-24 오후 3 12 48" src="https://github.com/user-attachments/assets/3518d851-cdf8-4a4a-86a9-bbacbdfc39ec" />
+
+☑️ **그래프**
+![Comparison of Cohesion and Coupling between Structures](https://github.com/user-attachments/assets/f92c7ee2-39c5-4db4-8e07-936102e24764)
 
 
 
@@ -585,6 +589,8 @@ import ace_tools as tools; tools.display_dataframe_to_user("구조별 응집도/
 
 * ✅ 의존성 주입 + 추상화(인터페이스)를 활용
 * ✅ 사용자 흐름을 서비스 계층으로 분리해 테스트, 유지보수 용이
-* ✅ 클래스 설계 원칙에 따라 구현이 됨.
+* ✅ 개선 구조는 클래스 수와 메서드 수가 증가했지만, 구조 분리가 명확하며 유지보수성이 높음
+* ✅ 응집도는 개선 구조가 역할 분리를 통해 높은 수준을 유지함
+* ✅ 결합도는 인터페이스 도입 덕분에 개선 구조가 더 낮음 → 유연한 구조
 * ✅ 클래스 간 책임을 명확히 분리하고, 추상화를 도입하여 유지보수성과 확장성을 강화한 구조
 ---
