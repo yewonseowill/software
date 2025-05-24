@@ -275,11 +275,13 @@ shopping_flow/
 ---
 
 ## 📌 응집도 평가 (Cohesion)
+<br>
 <img width="1022" alt="스크린샷 2025-05-24 오후 2 51 12" src="https://github.com/user-attachments/assets/f8e8fc3c-7b8d-4c3d-924c-ef75bab8a1af" />
 
 ---
 
 ## 🔗 결합도 평가 (Coupling)
+<br>
 <img width="1088" alt="스크린샷 2025-05-24 오후 2 52 26" src="https://github.com/user-attachments/assets/50d57065-0b0b-48fc-8419-223e09e78638" />
 
 
@@ -288,6 +290,7 @@ shopping_flow/
 ---
 
 ## 📊 종합 평가 요약
+<br>
 <img width="781" alt="스크린샷 2025-05-24 오후 2 53 30" src="https://github.com/user-attachments/assets/37e5dab2-f80e-47ba-8e28-4ff623e8ff79" />
 
 
