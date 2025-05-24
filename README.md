@@ -191,6 +191,8 @@ if __name__ == "__main__":
 
 ```
 
+🔗 [Google Colab Code Link](https://colab.research.google.com/drive/1-5BSQHrmf6QDwBGMkTixB7D0aH5T5tDb?usp=sharing)
+
 :white_check_mark:
  **실행결과**
 
