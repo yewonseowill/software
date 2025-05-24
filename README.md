@@ -556,7 +556,8 @@ $ python main.py
 
 * 두 구조 모두 클래스 내부 메서드 간 응집도는 유사
 * **개선 구조는 결합도를 크게 줄여 유지보수성과 확장성에서 유리함**
-🔍 해석
+  
+🔍 **해석**
 - Cohesion Score: 두 구조 모두 약 3.89로 동일 → 클래스 내부 메서드 간 연관성이 비슷함
 - Coupling Score: ✅ 개선 구조는 12점으로 매우 느슨한 결합, ⚠️ 기존 구조는 6점 → 명시적 의존이 많아 유지보수에 불리
 - 결합도 계산 공식 : coupling_score = max(0, 10 - explicit_dependency * 2 + (2 if interface_used else 0))
