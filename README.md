@@ -12,6 +12,7 @@
 ---
 
 ## 2. 프로젝트 프로세스 플로우차트 (Mermaid Flowchart)
+<img width="467" alt="스크린샷 2025-05-24 오후 1 30 14" src="https://github.com/user-attachments/assets/8e92ced7-b5c0-4fd0-a917-251f5b599f23" />
 
 ```mermaid
 sequenceDiagram
