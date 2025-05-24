@@ -221,6 +221,7 @@ shopping_flow.py
 🧠 응집도 및 결합도 평가
 
 ✅ **응집도(Cohesion) 평가**
+<br>
 <img width="810" alt="스크린샷 2025-05-24 오후 2 47 55" src="https://github.com/user-attachments/assets/8dfd1e8d-cd57-4b9b-9ccc-69f4b2d70ac9" />
 
 📌 총평: 모든 클래스가 하나의 책임에 집중하여 유지보수가 매우 쉬운 구조임.
@@ -228,6 +229,7 @@ shopping_flow.py
 ⸻
 
 🔗 **결합도(Coupling) 평가**
+<br>
 <img width="814" alt="스크린샷 2025-05-24 오후 2 49 23" src="https://github.com/user-attachments/assets/60425e3c-8258-48bd-b935-ed195d1268da" />
 
 📌 총평: 클래스 간 의존성이 낮은 편이나, 추상화 인터페이스가 도입되면 결합도를 더 낮출 수 있음.
@@ -235,6 +237,7 @@ shopping_flow.py
 ⸻
 
 📊 **종합 평가 요약**
+<br>
 <img width="727" alt="스크린샷 2025-05-24 오후 2 50 25" src="https://github.com/user-attachments/assets/cc0f86af-edad-4561-bdc8-24fdd9397ca7" />
 
 
