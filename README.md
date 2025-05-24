@@ -1,7 +1,6 @@
-# 🌟 Pythonì\x9c¼\x9c\xbc\x9c\xbc\uub85c 구현한 상품 검색 시스템 - 이름: shopping\_flow
+# 🌟 소프트웨어 공학 - 개인과제
 
-개발 견연적으로 '일상속 상품 검색 기능'을 구현한 프로젝트입니다.
-그리고 이 프로젝트의 기타 것과 구조는 어떻게 Mermaid Flowchart·Python Code와 연결되는지 계기간적으로 정리했습니다.
+- '일상속 상품 검색 기능'을 구현한 프로젝트
 
 ---
 
@@ -12,33 +11,68 @@
 
 ---
 
-## 2. 프로젝트 프로세스 호내 (Mermaid Flowchart)
+## 2. 프로젝트 프로세스 플로우차트 (Mermaid Flowchart)
 
 ```mermaid
-flowchart TD
-    Start[\U0001f4cd 상품서비스 시작] --> Load[\U0001f4c2 전체 상품 보기]
-    Load --> Search[\U0001f50d "모양의 마우스" 검색]
-    Search --> Filter[\U0001f4c3 가격 < 30000 && 브랜드 == 로지텍]
-    Filter --> ShowResult[\U0001f5c3 검색 결과 표시]
-    ShowResult --> Detail[\U0001f4cb 검색 결과에서 하나 선택]
-    Detail --> View[\U0001f4d6 상세 페이지 표시]
-    View --> End[\U0001f6d2 가입된 상품 확인 완료]
+sequenceDiagram
+    %% 사용자, 전체 상품 조회 → 검색 → 정렬/필터 → 상세 보기까지의 전체 흐름
+
+    participant User as 사용자
+    participant WebApp as 쇼핑몰 웹앱 (UI)
+    participant Server as 서버
+    participant ProductDB as 상품 DB
+
+    %% 0. 전체 상품 리스트 초기 로드
+    User->>WebApp: 쇼핑몰 접속
+    WebApp->>Server: 전체 상품 리스트 요청
+    Server->>ProductDB: 최신 상품 10개 조회
+    ProductDB-->>Server: 상품 리스트 10개 반환
+    Server-->>WebApp: 전체 상품 리스트 응답
+    WebApp-->>User: UI에 상품 10개 표시
+
+    %% 1. 플랫폼 선택
+    User->>WebApp: 쿠팡 클릭
+    WebApp->>Server: 쿠팡 홈으로 리다이렉트
+
+    %% 2. 검색
+    User->>WebApp: "무선 마우스" 검색어 입력
+    WebApp->>Server: 검색 요청 (검색어 전달)
+    Server->>ProductDB: 키워드 기반 상품 조회
+    ProductDB-->>Server: 검색 결과 반환
+
+    %% 3. 정렬 및 필터 적용
+    User->>WebApp: "가격 낮은 순" 정렬 선택
+    User->>WebApp: "브랜드=로지텍, 가격 < 30000원" 필터 선택
+    WebApp->>Server: 정렬 및 필터 조건 전달
+    Server->>ProductDB: 조건 적용 후 상품 재조회
+    ProductDB-->>Server: 정렬/필터 적용된 상품 리스트
+    Server-->>WebApp: 최종 상품 리스트 응답
+    WebApp-->>User: UI에 결과 표시
+
+    %% 4. 상세 보기
+    User->>WebApp: 상품 상세 페이지 클릭
+    WebApp->>Server: 상품 ID 전달
+    Server->>ProductDB: 해당 상품 정보 조회
+    ProductDB-->>Server: 상품 상세 정보
+    Server-->>WebApp: 상세 정보 응답
+    WebApp-->>User: 상세 페이지 표시
 ```
 
 ---
 
 ## 3. 구현을 위한 파이썬 코드
+```
+
+```
+
 
 ### 사용 클래스:
 
-* `Product`: 상품의 데이터 가지고 있는 객체
-* `ProductStore`: 검색, 필터, 상세 검색 기능
-* `User`: 개인 검색 행동 시루리얼을 가지고 시도
+
 
 ### 구현 목적:
 
-* 단순하고 간단한 형식
-* 최소한의 클래스를 갖고, 클래스 및 메서드 수준에서 유지법을 가능성있게 적용
+
 
 ---
 
@@ -54,7 +88,7 @@ shopping_flow.py
 
 ---
 
-## 5. 자동 구성 포인트 (약속)
+## 5.
 
 | 키점     | 가지가 있다         | 판단 |
 | ------ | -------------- | -- |
@@ -64,10 +98,6 @@ shopping_flow.py
 
 ---
 
-## 6. 결단
-
-* 이 Mermaid Flowchart 구조는 파이썬에서 서비스 상품 검색을 가지고 있는 최소 단\uc계의 개발 프로젝트를 단순히 구현한 경우에 해당합니다.
-* 어떻게 구성하나에 따라 가능성, 유지법, 검증 가능성이 각각 정리되어 있습니다.
-* 이 구조는 진정한 OOP(객체직성과 간결도 고등) 구성의 규칙과 추구로 충돌합니다.
+## 6. 결론
 
 ---
