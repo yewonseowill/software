@@ -83,22 +83,24 @@ sequenceDiagram
 ```
 # shopping_flow.py
 
-from typing import List, Optional
+from typing import List, Optional  # 타입 힌트를 위한 모듈
 
-# 상품 클래스
+# ✅ 상품 클래스: 개별 상품의 정보를 저장하는 객체
 class Product:
     def __init__(self, product_id: int, name: str, brand: str, price: int):
-        self.product_id = product_id
-        self.name = name
-        self.brand = brand
-        self.price = price
+        self.product_id = product_id  # 상품 고유 ID
+        self.name = name              # 상품 이름
+        self.brand = brand            # 브랜드명
+        self.price = price            # 가격
 
     def __repr__(self):
+        # 상품 정보를 문자열로 표현할 때 사용
         return f"{self.name} ({self.brand}) - {self.price}원"
 
-# 상품 저장소 (데이터)
+# ✅ 상품 저장소 클래스: 상품 목록을 보관하고 검색/필터/조회 기능 제공
 class ProductRepository:
     def __init__(self):
+        # 초기 상품 10개를 리스트에 저장
         self.products = [
             Product(1, "로지텍 무선 마우스", "로지텍", 25000),
             Product(2, "HP 유선 마우스", "HP", 15000),
@@ -112,12 +114,15 @@ class ProductRepository:
             Product(10, "로지텍 사일런트 마우스", "로지텍", 27000),
         ]
 
+    # 전체 또는 최신 상품 일부 반환
     def get_latest_products(self, count: int = 10) -> List[Product]:
         return self.products[:count]
 
+    # 키워드가 포함된 상품 검색
     def search(self, keyword: str) -> List[Product]:
         return [p for p in self.products if keyword in p.name]
 
+    # 브랜드 및 가격 필터링
     def filter(self, products: List[Product], brand: Optional[str], max_price: Optional[int]) -> List[Product]:
         filtered = products
         if brand:
@@ -126,55 +131,63 @@ class ProductRepository:
             filtered = [p for p in filtered if p.price <= max_price]
         return filtered
 
+    # 상품 ID로 상세 정보 조회
     def get_detail(self, product_id: int) -> Optional[Product]:
         for p in self.products:
             if p.product_id == product_id:
                 return p
         return None
 
-# 웹 앱 로직
+# ✅ 웹 앱 클래스: 저장소를 통해 사용자 요청을 처리
 class WebApp:
     def __init__(self, repository: ProductRepository):
-        self.repo = repository
+        self.repo = repository  # 저장소 주입
 
+    # 메인 페이지용 최신 상품 불러오기
     def load_home(self):
         return self.repo.get_latest_products()
 
+    # 검색 + 필터 + 정렬 처리
     def search_products(self, keyword: str, brand: Optional[str], max_price: Optional[int]):
         result = self.repo.search(keyword)
         return sorted(self.repo.filter(result, brand, max_price), key=lambda x: x.price)
 
+    # 상품 ID로 상세 정보 반환
     def show_detail(self, product_id: int):
         return self.repo.get_detail(product_id)
 
-# 사용자 시뮬레이션
+# ✅ 사용자 클래스: 실제 사용자가 서비스를 이용하는 흐름을 시뮬레이션
 class User:
     def __init__(self, app: WebApp):
         self.app = app
 
     def run(self):
         print("📲 쇼핑몰 접속")
+
+        # 홈에 접속했을 때 최신 상품 목록 출력
         latest = self.app.load_home()
         print("🛒 최신 상품 리스트:")
         for p in latest:
             print("-", p)
 
+        # '마우스' 검색 후 필터 적용
         print("\n🔍 '마우스' 검색 + 로지텍 브랜드 + 가격 ≤ 30000원")
         filtered = self.app.search_products("마우스", "로지텍", 30000)
         for p in filtered:
             print("🎯 검색결과:", p)
 
+        # 검색 결과 중 첫 번째 상품 상세 보기
         if filtered:
             detail = self.app.show_detail(filtered[0].product_id)
             print("\n📄 상세 페이지:")
             print("📝", detail)
 
-# 실행
+# ✅ 메인 실행 로직
 if __name__ == "__main__":
-    repo = ProductRepository()
-    app = WebApp(repo)
-    user = User(app)
-    user.run()
+    repo = ProductRepository()  # 저장소 생성
+    app = WebApp(repo)          # 웹앱 생성 (저장소 주입)
+    user = User(app)            # 사용자 생성 (웹앱 주입)
+    user.run()                  # 시뮬레이션 실행
 
 ```
 
