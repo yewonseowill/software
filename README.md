@@ -3,6 +3,7 @@
 - '일상 속 상품 검색 기능'을 구현한 프로젝트
 
 
+
 ---
 
 ## 1. 프로젝트 개요
@@ -574,7 +575,7 @@ import ace_tools as tools; tools.display_dataframe_to_user("구조별 응집도/
 ```
 ☑️ **기존/개선된 코드의 응집도/결합도 비교**
 <br>
-<img width="679" alt="스크린샷 2025-05-24 오후 3 10 03" src="https://github.com/user-attachments/assets/6657ffff-3f91-45d0-984a-c8ae4533cacb" />
+<img width="799" alt="스크린샷 2025-05-24 오후 8 19 00" src="https://github.com/user-attachments/assets/879f9c3e-c25d-4f8d-b3fe-2907aa6da047" />
 <br>
 
 <img width="686" alt="스크린샷 2025-05-24 오후 3 12 48" src="https://github.com/user-attachments/assets/3518d851-cdf8-4a4a-86a9-bbacbdfc39ec" />
