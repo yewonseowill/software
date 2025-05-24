@@ -256,10 +256,197 @@ shopping_flow.py
 ⸻
 
 💡 개선 아이디어
-	•	ProductRepository를 인터페이스(ProductStoreInterface)로 추상화하여 WebApp이 인터페이스에 의존하도록 개선
-	•	User 클래스가 WebApp에만 의존하지 않도록 서비스 계층 또는 컨트롤러 분리 시 확장성 향상 가능
+- ProductRepository를 인터페이스(ProductStoreInterface)로 추상화하여 WebApp이 인터페이스에 의존하도록 개선
+- User 클래스가 WebApp에만 의존하지 않도록 서비스 계층 또는 컨트롤러 분리 시 확장성 향상 가능
 
 ⸻
+# 🛍 개선된 Python 쇼핑몰 검색 시스템
+
+Python으로 구현된 본 프로젝트는 구조 개선을 통해 **응집도는 유지하면서 결합도는 낮춘 예제**입니다. 클래스 간 책임을 명확히 분리하고, 추상화를 도입하여 유지보수성과 확장성을 강화한 구조입니다.
+
+---
+
+## 📁 프로젝트 구조
+
+```plaintext
+shopping_flow/
+├── product.py             # Product 클래스 정의
+├── store_interface.py     # ProductStoreInterface 정의 (추상화)
+├── repository.py          # ProductRepository 구현체
+├── webapp.py              # WebApp 로직 처리 (인터페이스에 의존)
+├── service.py             # AppService 계층 (사용자 흐름 실행)
+└── main.py                # 실행 진입점
+```
+
+---
+
+## ⚙️ 설계 변경 요약
+
+| 변경 항목      | 개선 전                    | 개선 후                          | 효과            |
+| ---------- | ----------------------- | ----------------------------- | ------------- |
+| WebApp 의존성 | ProductRepository 직접 의존 | ProductStoreInterface 추상화에 의존 | 결합도 감소        |
+| 사용자 흐름     | User → WebApp           | AppService 계층 추가              | 계층 분리, 확장성 향상 |
+
+---
+
+## 📌 응집도 평가 (Cohesion)
+
+| 클래스 이름              | 역할                  | 응집도 수준  | 설명                       |
+| ------------------- | ------------------- | ------- | ------------------------ |
+| `Product`           | 상품 데이터를 저장하는 객체     | 매우 높음 ✅ | 순수 데이터만 보관, 단일 책임 원칙 충실  |
+| `ProductRepository` | 상품 목록 관리 및 검색/필터 제공 | 높음 ✅    | 모든 메서드가 상품 리스트 관련 작업에 집중 |
+| `WebApp`            | 사용자 요청 흐름 처리        | 높음 ✅    | 저장소에 대한 요청 및 정렬 처리만 담당   |
+| `AppService`        | 사용자 시나리오 실행 흐름      | 높음 ✅    | 흐름 제어 전담, UI 로직은 포함하지 않음 |
+
+---
+
+## 🔗 결합도 평가 (Coupling)
+
+| 클래스 이름              | 의존 대상                 | 결합도 수준   | 설명                             |
+| ------------------- | --------------------- | -------- | ------------------------------ |
+| `ProductRepository` | 없음                    | 없음 ✅     | 독립적인 구조, 다른 모듈에 의존하지 않음        |
+| `WebApp`            | ProductStoreInterface | 낮음 ✅     | 추상화된 인터페이스에만 의존                |
+| `AppService`        | WebApp                | 중간 수준 ⚠️ | 특정 객체에는 의존하지만, 테스트와 확장에 유리한 구조 |
+
+📌 **총평:** 클래스 간 의존성이 낮고, 추상화 인터페이스 도입으로 테스트 용이성과 재사용성, 유지보수성이 우수함
+
+---
+
+## 📊 종합 평가 요약
+
+| 항목         | 결과    | 설명                     |
+| ---------- | ----- | ---------------------- |
+| ✅ 응집도      | 매우 높음 | 클래스 역할이 명확히 분리되어 있음    |
+| ✅ 결합도      | 낮음    | 추상화로 인한 느슨한 연결 구조      |
+| 🧪 테스트 용이성 | 우수    | 의존성 주입 구조로 Mock 테스트 가능 |
+| 🛠 유지보수성   | 매우 우수 | 수정 시 영향이 적고 구조가 명확함    |
+
+---
+
+## ✅ 실행 예시
+
+```bash
+$ python main.py
+📲 쇼핑몰 접속
+🛒 최신 상품 리스트:
+- 로지텍 무선 마우스 (로지텍) - 25000원
+...
+🔍 '마우스' 검색 + 로지텍 브랜드 + 가격 ≤ 30000원
+🎯 검색결과: 로지텍 무선 마우스 (로지텍) - 25000원
+📄 상세 페이지:
+📝 로지텍 무선 마우스 (로지텍) - 25000원
+```
+
+---
+
+## 🔍 개선 포인트 요약
+
+* ✅ **의존성 주입** + **추상화(인터페이스)** 도입
+* ✅ **사용자 흐름을 서비스 계층으로 분리**해 테스트, 유지보수 용이
+* ✅ 클래스 설계 원칙(SRP, DIP)에 맞는 실습 예시로 적합
+
+---
+
+```
+from typing import List, Optional, Protocol
+
+# 상품 클래스
+class Product:
+    def __init__(self, product_id: int, name: str, brand: str, price: int):
+        self.product_id = product_id
+        self.name = name
+        self.brand = brand
+        self.price = price
+
+    def __repr__(self):
+        return f"{self.name} ({self.brand}) - {self.price}원"
+
+# 추상 인터페이스
+class ProductStoreInterface(Protocol):
+    def get_latest_products(self, count: int) -> List[Product]: ...
+    def search(self, keyword: str) -> List[Product]: ...
+    def filter(self, products: List[Product], brand: Optional[str], max_price: Optional[int]) -> List[Product]: ...
+    def get_detail(self, product_id: int) -> Optional[Product]: ...
+
+# 구현체
+class ProductRepository(ProductStoreInterface):
+    def __init__(self):
+        self.products = [
+            Product(1, "로지텍 무선 마우스", "로지텍", 25000),
+            Product(2, "HP 유선 마우스", "HP", 15000),
+            Product(3, "로지텍 게이밍 마우스", "로지텍", 45000),
+            Product(4, "삼성 블루투스 마우스", "삼성", 29000),
+            Product(5, "LG 유선 마우스", "LG", 18000),
+            Product(6, "로지텍 무선 키보드", "로지텍", 32000),
+            Product(7, "애플 매직 마우스", "애플", 79000),
+            Product(8, "델 유선 마우스", "델", 14000),
+            Product(9, "MS 블루투스 마우스", "MS", 31000),
+            Product(10, "로지텍 사일런트 마우스", "로지텍", 27000),
+        ]
+
+    def get_latest_products(self, count: int = 10) -> List[Product]:
+        return self.products[:count]
+
+    def search(self, keyword: str) -> List[Product]:
+        return [p for p in self.products if keyword in p.name]
+
+    def filter(self, products: List[Product], brand: Optional[str], max_price: Optional[int]) -> List[Product]:
+        result = products
+        if brand:
+            result = [p for p in result if p.brand == brand]
+        if max_price:
+            result = [p for p in result if p.price <= max_price]
+        return result
+
+    def get_detail(self, product_id: int) -> Optional[Product]:
+        for p in self.products:
+            if p.product_id == product_id:
+                return p
+        return None
+
+# WebApp 클래스
+class WebApp:
+    def __init__(self, store: ProductStoreInterface):
+        self.store = store
+
+    def load_home(self):
+        return self.store.get_latest_products(10)
+
+    def search_products(self, keyword: str, brand: Optional[str], max_price: Optional[int]):
+        results = self.store.search(keyword)
+        filtered = self.store.filter(results, brand, max_price)
+        return sorted(filtered, key=lambda x: x.price)
+
+    def show_detail(self, product_id: int):
+        return self.store.get_detail(product_id)
+
+# 사용자 흐름 담당 서비스 계층
+class AppService:
+    def __init__(self, app: WebApp):
+        self.app = app
+
+    def simulate_user_flow(self):
+        print("📲 쇼핑몰 접속")
+        for p in self.app.load_home():
+            print("🛒", p)
+
+        print("\n🔍 '마우스' 검색 + 로지텍 브랜드 + 가격 ≤ 30000원")
+        filtered = self.app.search_products("마우스", "로지텍", 30000)
+        for p in filtered:
+            print("🎯", p)
+
+        if filtered:
+            print("\n📄 상세 페이지:")
+            print("📝", self.app.show_detail(filtered[0].product_id))
+
+# 실행부
+if __name__ == "__main__":
+    store = ProductRepository()
+    web_app = WebApp(store)
+    service = AppService(web_app)
+    service.simulate_user_flow()
+
+```
 
 
 ---
